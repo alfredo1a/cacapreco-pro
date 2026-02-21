@@ -1,0 +1,127 @@
+{
+  "id": "102019c05d3db5079f9b8f732967438079d",
+  "version": "102019c7dc81639789686ed6d9073e61190",
+  "schema": {
+    "name": "retailer",
+    "description": "Stores or marketplaces selling the products.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the retailer.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "name",
+        "description": "Name of the retailer or store.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        }
+      },
+      {
+        "name": "website_url",
+        "description": "Main URL of the retailer website.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        }
+      },
+      {
+        "name": "logo_url",
+        "description": "URL to the retailer logo image.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        },
+        "nullable": true
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "name"
+        ],
+        "unique": true,
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ]
+  },
+  "task": {
+    "id": "6998d738669e58dcd2f6b923",
+    "root": "697a4eb596c581f81806fe8c",
+    "project": "697a4eb596c581f81806fe8b",
+    "user": "58717340-60d1-70ce-32d1-5a01951f8e9e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

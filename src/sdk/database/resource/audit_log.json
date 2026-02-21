@@ -1,0 +1,206 @@
+{
+  "id": "102019c05e8207e79a4b0670fcf49ad15a0",
+  "version": "102019c7dc81639789686ed6d9073e61190",
+  "schema": {
+    "name": "audit_log",
+    "description": "Audit trail tracking user actions and system changes.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the audit log entry.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "ID of the user who performed the action.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal user data"
+        },
+        "nullable": true
+      },
+      {
+        "name": "action",
+        "description": "The type of action performed.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Audit trail"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Create"
+          },
+          {
+            "number": 2,
+            "value": "Update"
+          },
+          {
+            "number": 3,
+            "value": "Delete"
+          },
+          {
+            "number": 4,
+            "value": "Login"
+          },
+          {
+            "number": 5,
+            "value": "Logout"
+          },
+          {
+            "number": 6,
+            "value": "Other"
+          }
+        ]
+      },
+      {
+        "name": "entity_type",
+        "description": "The type of entity affected by the action.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "entity_id",
+        "description": "The ID of the specific entity affected.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "changes_json",
+        "description": "JSON string detailing the changes made.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Confidential data history"
+        },
+        "nullable": true
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "action"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "entity_id",
+          "entity_type"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "create_time"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "task": {
+    "id": "6998d738669e58dcd2f6b923",
+    "root": "697a4eb596c581f81806fe8c",
+    "project": "697a4eb596c581f81806fe8b",
+    "user": "58717340-60d1-70ce-32d1-5a01951f8e9e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

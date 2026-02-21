@@ -1,0 +1,211 @@
+{
+  "id": "102019c05d760207e9a8e2c052ed52f60c1",
+  "version": "102019c7dc81639789686ed6d9073e61190",
+  "schema": {
+    "name": "price_alert",
+    "description": "Alerts set by users to notify them of price changes.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the price alert.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "ID of the user who set the alert.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal user data"
+        }
+      },
+      {
+        "name": "product_id",
+        "description": "ID of the product being monitored.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Relation key"
+        }
+      },
+      {
+        "name": "alert_type",
+        "description": "Type of alert (e.g., price drop, target price).",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "AnyDrop"
+          },
+          {
+            "number": 2,
+            "value": "PercentageDrop"
+          },
+          {
+            "number": 3,
+            "value": "TargetPrice"
+          }
+        ]
+      },
+      {
+        "name": "threshold_percentage",
+        "description": "Percentage drop required to trigger the alert.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference"
+        },
+        "nullable": true,
+        "numeric": "float"
+      },
+      {
+        "name": "target_price",
+        "description": "Specific price target to trigger the alert.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference"
+        },
+        "nullable": true,
+        "numeric": "float"
+      },
+      {
+        "name": "is_active",
+        "description": "Whether the alert is currently active.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Status flag"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "product_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "is_active"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      },
+      {
+        "referencing_fields": [
+          "product_id"
+        ],
+        "referenced_entity": {
+          "name": "product"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6998d738669e58dcd2f6b923",
+    "root": "697a4eb596c581f81806fe8c",
+    "project": "697a4eb596c581f81806fe8b",
+    "user": "58717340-60d1-70ce-32d1-5a01951f8e9e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

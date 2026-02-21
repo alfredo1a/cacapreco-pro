@@ -1,0 +1,247 @@
+{
+  "id": "102019c05dcbd60712c8bccc3da46ac18db",
+  "version": "102019c7dc81639789686ed6d9073e61190",
+  "schema": {
+    "name": "local_submission",
+    "description": "Crowdsourced product pricing and availability data submitted by users.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the submission.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "ID of the user who made the submission.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal user data"
+        }
+      },
+      {
+        "name": "product_id",
+        "description": "ID of the product being reported.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Relation key"
+        }
+      },
+      {
+        "name": "location_id",
+        "description": "ID of the location where the product was found.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Relation key"
+        }
+      },
+      {
+        "name": "price",
+        "description": "Price observed for the product.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "quantity",
+        "description": "Quantity or volume associated with the price.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "unit",
+        "description": "Unit of measurement for the quantity (e.g., kg, unit).",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        }
+      },
+      {
+        "name": "photo_url",
+        "description": "URL of the photo submitted as evidence.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public information"
+        },
+        "nullable": true
+      },
+      {
+        "name": "verification_status",
+        "description": "Status of the submission verification process.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public status"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Pending"
+          },
+          {
+            "number": 2,
+            "value": "Verified"
+          },
+          {
+            "number": 3,
+            "value": "Rejected"
+          }
+        ]
+      },
+      {
+        "name": "reputation_score",
+        "description": "Score reflecting the reliability of this submission.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public metric"
+        },
+        "numeric": "int"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "product_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "location_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ]
+      },
+      {
+        "referencing_fields": [
+          "product_id"
+        ],
+        "referenced_entity": {
+          "name": "product"
+        },
+        "referenced_fields": [
+          "id"
+        ]
+      },
+      {
+        "referencing_fields": [
+          "location_id"
+        ],
+        "referenced_entity": {
+          "name": "location"
+        },
+        "referenced_fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "task": {
+    "id": "6998d738669e58dcd2f6b923",
+    "root": "697a4eb596c581f81806fe8c",
+    "project": "697a4eb596c581f81806fe8b",
+    "user": "58717340-60d1-70ce-32d1-5a01951f8e9e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}
